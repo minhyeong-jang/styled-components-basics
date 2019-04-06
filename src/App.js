@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styled, { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle, css, keyframes } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   body{
@@ -15,7 +15,7 @@ class App extends Component {
         <GlobalStyle />
         <Container>
           <Button>Hello</Button>
-          <Button active>Hello</Button>
+          <Button active rotationTime={3}>Hello</Button>
           <Anchor href="http://google.com">Go to google</Anchor>
         </Container>
       </React.Fragment> 
@@ -24,7 +24,7 @@ class App extends Component {
 }
 
 const Container = styled.div`
-  
+  background-color: #dedede;
 `;
 
 const Button = styled.button`
@@ -39,11 +39,25 @@ const Button = styled.button`
   &:active, &:focus {
     outline: none;
   }
-  background-color: ${props => (props.active ? 'red' : 'green')}
+  background-color: ${props => (props.active ? 'red' : 'green')};
+  ${props => {
+    if(props.active) {
+      return css`animation: ${rotation} ${props.rotationTime}s linear infinite`;
+    }
+  }};
 `;
 
 const Anchor = styled(Button.withComponent("a"))`
   text-decoration: none;
+`;
+
+const rotation = keyframes`
+  from {
+    transform: rotate(0deg)
+  }
+  to {
+    transform: rotate(360deg);
+  }
 `;
 
 export default App;
