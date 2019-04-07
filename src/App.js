@@ -9,14 +9,16 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
+const Card = styled.div`
+`;
+
 const Container = styled.div`
   height: 100vh;
   width: 100%;
   background-color: #dedede;
-`;
-
-const Card = styled.div`
-  background-color: white;
+  ${Card} {
+    background-color: ${props => props.theme.dangerColor}
+  }
 `;
 
 const Button = styled.button`
@@ -32,6 +34,7 @@ class App extends Component {
         <GlobalStyle />
         <ThemeProvider theme={theme}>
           <Container>
+            <Form />
             <Form />
           </Container>
         </ThemeProvider>
